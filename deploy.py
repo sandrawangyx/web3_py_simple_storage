@@ -6,9 +6,9 @@ from web3 import Web3
 # from solcx import compile_standard
 from solcx import compile_standard, install_solc
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 
 with open("./SimpleStorage.sol", "r") as file:
@@ -51,10 +51,10 @@ abi = json.loads(
 # chain_id = 4
 #
 # For connecting to ganache
-w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:7545"))
 chain_id = 1337
-my_address = "0xdbB4A708755dfD59f9c4b100B2BE23a6d2EB7D57"
-private_key = "ffdd7a010ab8c089d95a9c2ff24e75b21744b5db26c3cd66d14f8e91c46afcc4"
+my_address = "0x24b721D2fcbA2364Fca4244D37CfdDF4389eA91B"
+private_key = "0x4cf11bba4cdebc5076cd6e2ff932413d63f31eeeec6081e32e927fdc476ce03e"
 
 # Create the contract in Python
 SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
@@ -83,7 +83,7 @@ print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 # Working with deployed Contracts
 simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 print(f"Initial Stored Value {simple_storage.functions.retrieve().call()}")
-greeting_transaction = simple_storage.functions.store(15).buildTransaction(
+greeting_transaction = simple_storage.functions.store(200).buildTransaction(
     {
         "chainId": chain_id,
         "gasPrice": w3.eth.gas_price,
